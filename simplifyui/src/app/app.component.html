@@ -1,42 +1,38 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Simplify VMS</a>
-
-
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['features/register']">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['features/login']">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['features/profile']">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['features/home']">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['features/admin']">Administrator</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['features/user']">User</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['features/moderator']">Moderator</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-      </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="container">
-    <router-outlet></router-outlet>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a href="#" class="navbar-brand">Simplify VMS</a>
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item" *ngIf="showAdminBoard">
+          <a [routerLink]="['features/admin']" class="nav-link" >Admin Board</a>
+        </li>
+        <li class="nav-item" *ngIf="showModeratorBoard">
+          <a [routerLink]="['features/moderator']" class="nav-link" >Moderator Board</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['features/user']" class="nav-link" *ngIf="isLoggedIn" >User</a>
+        </li>
+      </ul>
+  
+      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+        <li class="nav-item">
+          <a [routerLink]="['features/register']" class="nav-link">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['features/login']" class="nav-link" >Login</a>
+        </li>
+      </ul>
+  
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a [routerLink]="['features/profile']" class="nav-link" >{{ username }}</a>
+        </li>
+        <li class="nav-item">
+          <a href class="nav-link" (click)="logout()">LogOut</a>
+        </li>
+      </ul>
+    </nav>
+  
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-</div>

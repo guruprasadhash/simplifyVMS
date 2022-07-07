@@ -10,6 +10,7 @@
               <button class="btn btn-outline-secondary" type="button" (click)="searchTitle()">
                 Search
               </button>
+              <a href="/features/addjobreq" class="btn btn-sm btn-primary">Add New Job</a>
             </div>
           </div>
           <div class="card">
@@ -27,13 +28,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let jobreq of jobreqs; let i = index"
-                    [class.active]="i == currentIndex" (click)="setActiveJobreq(jobreq, i)">
+                    <tr *ngFor="let jobreq of jobreqs; let i = index" [class.active]="i == currentIndex">
                       <th scope="row">{{ jobreq.title }}</th>
                       <td>{{ jobreq.description }}</td>
                       <td>{{ jobreq.budget }}</td>
                       <td>{{ jobreq.published }}</td>
-                      <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
+                      <td><a href="/features/jobreqdetails/{{jobreq.id}}" class="btn btn-sm btn-primary">View</a></td>
                     </tr>
                   </tbody>
                 </table>
@@ -44,4 +44,7 @@
       </div>
     </main>
   </div>
+</div>
+<div>
+  <router-outlet></router-outlet>
 </div>

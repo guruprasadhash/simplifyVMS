@@ -1,1 +1,86 @@
-<p>jobreq-details works!</p>
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentJobreq.id">
+      <h4>Tutorial</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentJobreq.title }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentJobreq.description }}
+      </div>
+      <div>
+        <label><strong>Status:</strong></label>
+        {{ currentJobreq.published ? "Published" : "Pending" }}
+      </div>
+      <a
+        class="badge badge-warning"
+        routerLink="/tutorials/{{ currentJobreq.id }}"
+      >
+        Edit
+      </a>
+    </div>
+    <div *ngIf="!currentJobreq">
+      <br />
+      <p>Please click on a Tutorial...</p>
+    </div>
+  </div>
+  <ng-template #editable>
+    <div *ngIf="currentJobreq.id" class="edit-form">
+      <h4>Tutorial</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentJobreq.title"
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="currentJobreq.description"
+            name="description"
+          />
+        </div>
+        <div class="form-group">
+          <label><strong>Status:</strong></label>
+          {{ currentJobreq.published ? "Published" : "Pending" }}
+        </div>
+      </form>
+      <button
+        class="badge badge-primary mr-2"
+        *ngIf="currentJobreq.published"
+        (click)="updatePublished(2)"
+      >
+        UnPublish
+      </button>
+      <button
+        *ngIf="!currentJobreq.published"
+        class="badge badge-primary mr-2"
+        (click)="updatePublished(3)"
+      >
+        Publish
+      </button>
+      <button class="badge badge-danger mr-2" (click)="deleteJobreq()">
+        Delete
+      </button>
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateJobreq()"
+      >
+        Update
+      </button>
+      <p>{{ message }}</p>
+    </div>
+    <div *ngIf="!currentJobreq.id">
+      <br />
+      <p>Cannot access this Jobreq...</p>
+    </div>
+  </ng-template>

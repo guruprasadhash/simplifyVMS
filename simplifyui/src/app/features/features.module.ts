@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'addjobreq', component: AddJobreqComponent },
-  { path: 'jobreqdetails', component: JobreqDetailsComponent },
+  { path: 'jobreqdetails/:id', component: JobreqDetailsComponent },
 ];
 
 @NgModule({

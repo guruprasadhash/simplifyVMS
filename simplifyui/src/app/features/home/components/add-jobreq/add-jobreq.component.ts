@@ -32,6 +32,7 @@ export class AddJobreqComponent implements OnInit {
         next: (res) => {
           console.log(res);
           this.submitted = true;
+          window.location.href = "/features/home";
         },
         error: (e) => console.error(e)
       });

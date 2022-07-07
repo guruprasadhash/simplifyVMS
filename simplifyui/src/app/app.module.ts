@@ -7,7 +7,6 @@ import { authInterceptorProviders } from './core/_helpers/auth.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
 @NgModule({
   declarations: [
     AppComponent

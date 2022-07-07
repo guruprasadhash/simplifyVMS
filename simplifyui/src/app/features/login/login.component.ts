@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../core/_services/auth.service';
 import { TokenStorageService } from '../../core/_services/token-storage.service';
 
@@ -7,6 +8,7 @@ import { TokenStorageService } from '../../core/_services/token-storage.service'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
   form: any = {
     username: null,
@@ -47,6 +49,6 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage(): void {
-    window.location.reload();
+    window.location.href = "/features/home";
   }
 }

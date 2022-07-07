@@ -5,11 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './features.component.html',
   styleUrls: ['./features.component.css']
 })
+
 export class FeaturesComponent implements OnInit {
-
   constructor() { }
-
   ngOnInit(): void {
   }
-
 }

@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'core', loadChildren: () => import('./core/core.module').then(m => m.CoreModule) },
-  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
   { path: 'features', loadChildren: () => import('./features/features.module').then(m => m.FeaturesModule) }
 ];
 
@@ -16,4 +15,3 @@ const routes: Routes = [
   providers: []
 })
 export class AppRoutingModule { }
-

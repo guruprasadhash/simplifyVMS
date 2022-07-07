@@ -73,17 +73,6 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  removeAllJobreqs(): void {
-    this.jobreqService.deleteAll()
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.refreshList();
-        },
-        error: (e) => console.error(e)
-      });
-  }
-
   refreshList(): void {
     this.retrieveJobreqs();
     this.currentJobreq = {};

@@ -1,6 +1,6 @@
 <div *ngIf="viewMode; else editable">
     <div *ngIf="currentJobreq.id">
-      <h4>Tutorial</h4>
+      <h4>Job Requisition Details</h4>
       <div>
         <label><strong>Title:</strong></label> {{ currentJobreq.title }}
       </div>
@@ -14,19 +14,19 @@
       </div>
       <a
         class="badge badge-warning"
-        routerLink="/tutorials/{{ currentJobreq.id }}"
+        routerLink="/jobreqs/{{ currentJobreq.id }}"
       >
         Edit
       </a>
     </div>
     <div *ngIf="!currentJobreq">
       <br />
-      <p>Please click on a Tutorial...</p>
+      <p>Please click on a Job Requisition...</p>
     </div>
   </div>
   <ng-template #editable>
     <div *ngIf="currentJobreq.id" class="edit-form">
-      <h4>Tutorial</h4>
+      <h4>Job Requisition Details</h4>
       <form>
         <div class="form-group">
           <label for="title">Title</label>
@@ -49,8 +49,18 @@
           />
         </div>
         <div class="form-group">
+          <label for="budget">Budget</label>
+          <input
+            type="text"
+            class="form-control"
+            id="budget"
+            [(ngModel)]="currentJobreq.budget"
+            name="budget"
+          />
+        </div>
+        <div class="form-group">
           <label><strong>Status:</strong></label>
-          {{ currentJobreq.published ? "Published" : "Pending" }}
+          {{ currentJobreq.published }}
         </div>
       </form>
       <button
@@ -58,24 +68,14 @@
         *ngIf="currentJobreq.published"
         (click)="updatePublished(2)"
       >
-        UnPublish
-      </button>
-      <button
-        *ngIf="!currentJobreq.published"
-        class="badge badge-primary mr-2"
-        (click)="updatePublished(3)"
-      >
-        Publish
-      </button>
-      <button class="badge badge-danger mr-2" (click)="deleteJobreq()">
-        Delete
+        I Reviewed
       </button>
       <button
         type="submit"
         class="badge badge-success mb-2"
-        (click)="updateJobreq()"
+        (click)="updatePublished(3)"
       >
-        Update
+        I Approve
       </button>
       <p>{{ message }}</p>
     </div>

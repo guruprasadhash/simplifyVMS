@@ -79,7 +79,7 @@ export class JobreqDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.router.navigate(['/tutorials']);
+          this.router.navigate(['/jobreqs']);
         },
         error: (e) => console.error(e)
       });

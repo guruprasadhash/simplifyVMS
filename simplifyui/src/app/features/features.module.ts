@@ -10,12 +10,15 @@ import { FeaturesComponent } from './features.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { AddJobreqComponent } from './home/components/add-jobreq/add-jobreq.component';
+import { JobreqDetailsComponent } from './home/components/jobreq-details/jobreq-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
-
+  { path: 'addjobreq', component: AddJobreqComponent },
+  { path: 'jobreqdetails', component: JobreqDetailsComponent },
 ];
 
 @NgModule({
@@ -24,6 +27,8 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    AddJobreqComponent,
+    JobreqDetailsComponent,
   ],
   imports: [
     CommonModule,

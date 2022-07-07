@@ -12,10 +12,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./app/models");
 const Role = db.role;
 
-/*db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync Db');
   initial();
-});*/
+});
 
 function initial() {
   Role.create({
@@ -41,6 +41,7 @@ app.get("/", (req, res) => {
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/jobreq.routes')(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

@@ -10,7 +10,7 @@ export class AddJobreqComponent implements OnInit {
   jobreq: Jobreq = {
     title: '',
     description: '',
-    budget: 1000,
+    budget: 0,
     published: 1,
   };
   submitted = false;

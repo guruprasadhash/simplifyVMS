@@ -10,7 +10,9 @@
               <button class="btn btn-outline-secondary" type="button" (click)="searchTitle()">
                 Search
               </button>
-              <a href="/features/addjobreq" class="btn btn-sm btn-primary">Add New Job</a>
+              <div *ngIf="showUserBoard">
+                <a href="/features/addjobreq" class="btn btn-sm btn-primary">Add New Job</a>
+              </div>
             </div>
           </div>
           <div class="card">

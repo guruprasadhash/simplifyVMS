@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
+      console.log(this.roles);
       if(user.roles.length == 1){
         this.showUserBoard = true;
       }

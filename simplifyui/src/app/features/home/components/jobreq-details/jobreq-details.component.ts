@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Jobreq } from '../../models/jobreq.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobreqService } from '../../services/jobreq.service';
+import { TokenStorageService } from '../../../../core/_services/token-storage.service';
 
 @Component({
   selector: 'app-jobreq-details',
@@ -9,8 +10,11 @@ import { JobreqService } from '../../services/jobreq.service';
   styleUrls: ['./jobreq-details.component.css']
 })
 export class JobreqDetailsComponent implements OnInit {
-
+  private roles: string[] = [];
   viewMode = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  showUserBoard = false;
   currentJobreq: Jobreq = {
     title: '',
     description: '',
@@ -20,12 +24,20 @@ export class JobreqDetailsComponent implements OnInit {
 
   message = '';
   constructor(
+    private tokenStorageService: TokenStorageService, 
     private jobreqService: JobreqService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      if(user.roles.length == 1){
+        this.showUserBoard = true;
+      }
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
     if (!this.viewMode) {
       this.message = '';
       this.getJobreq(this.route.snapshot.params["id"]);

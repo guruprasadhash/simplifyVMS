@@ -1,84 +1,67 @@
 <div *ngIf="viewMode; else editable">
-    <div *ngIf="currentJobreq.id">
-      <h4>Job Requisition Details</h4>
-      <div>
-        <label><strong>Title:</strong></label> {{ currentJobreq.title }}
-      </div>
-      <div>
-        <label><strong>Description:</strong></label>
-        {{ currentJobreq.description }}
-      </div>
-      <div>
-        <label><strong>Status:</strong></label>
-        {{ currentJobreq.published ? "Published" : "Pending" }}
-      </div>
-      <a
-        class="badge badge-warning"
-        routerLink="/jobreqs/{{ currentJobreq.id }}"
-      >
-        Edit
-      </a>
+  <div *ngIf="currentJobreq.id">
+    <h4>Job Requisition Details</h4>
+    <div>
+      <label><strong>Title:</strong></label> {{ currentJobreq.title }}
     </div>
-    <div *ngIf="!currentJobreq">
-      <br />
-      <p>Please click on a Job Requisition...</p>
+    <div>
+      <label><strong>Description:</strong></label>
+      {{ currentJobreq.description }}
     </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ currentJobreq.published ? "Published" : "Pending" }}
+    </div>
+    <a class="badge badge-warning" routerLink="/jobreqs/{{ currentJobreq.id }}">
+      Edit
+    </a>
   </div>
-  <ng-template #editable>
-    <div *ngIf="currentJobreq.id" class="edit-form">
-      <h4>Job Requisition Details</h4>
-      <form>
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            [(ngModel)]="currentJobreq.title"
-            name="title"
-          />
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="description"
-            [(ngModel)]="currentJobreq.description"
-            name="description"
-          />
-        </div>
-        <div class="form-group">
-          <label for="budget">Budget</label>
-          <input
-            type="text"
-            class="form-control"
-            id="budget"
-            [(ngModel)]="currentJobreq.budget"
-            name="budget"
-          />
-        </div>
-        <div class="form-group">
-          <label><strong>Status:</strong></label>
-          {{ currentJobreq.published }}
-        </div>
-      </form>
-      <button
-        class="badge badge-primary mr-2"
-        (click)="updatePublished(2)"
-      >
-        I Reviewed
+  <div *ngIf="!currentJobreq">
+    <br />
+    <p>Please click on a Job Requisition...</p>
+  </div>
+</div>
+<ng-template #editable>
+  <div *ngIf="currentJobreq.id" class="edit-form">
+    <h4>Job Requisition Details</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="currentJobreq.title" name="title" />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" [(ngModel)]="currentJobreq.description"
+          name="description" />
+      </div>
+      <div class="form-group">
+        <label for="budget">Budget</label>
+        <input type="text" class="form-control" id="budget" [(ngModel)]="currentJobreq.budget" name="budget" />
+      </div>
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentJobreq.published }}
+      </div>
+    </form>
+    <div *ngIf="showAdminBoard">
+      <button class="badge badge-success mb-2" (click)="updatePublished(3)">
+        Approve
       </button>
-      <button
-        class="badge badge-success mb-2"
-        (click)="updatePublished(3)"
-      >
-        I Approve
+    </div>
+    <div *ngIf="showModeratorBoard">
+      <button class="badge badge-primary mr-2" (click)="updatePublished(2)">
+        Reviewed
       </button>
-      <p>{{ message }}</p>
     </div>
-    <div *ngIf="!currentJobreq.id">
-      <br />
-      <p>Cannot access this Jobreq...</p>
+    <div *ngIf="showUserBoard">
+      <button type="submit" class="badge  badge-primary mb-2" (click)="updateJobreq()">
+        Update
+      </button>
     </div>
-  </ng-template>
+    <p>{{ message }}</p>
+  </div>
+  <div *ngIf="!currentJobreq.id">
+    <br />
+    <p>Cannot access this Jobreq...</p>
+  </div>
+</ng-template>

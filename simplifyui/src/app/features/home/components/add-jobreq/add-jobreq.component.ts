@@ -30,7 +30,6 @@ export class AddJobreqComponent implements OnInit {
     this.jobreqService.create(data)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.submitted = true;
           window.location.href = "/features/home";
         },

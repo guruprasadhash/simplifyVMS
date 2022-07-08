@@ -49,7 +49,6 @@ export class JobreqDetailsComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.currentJobreq = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });

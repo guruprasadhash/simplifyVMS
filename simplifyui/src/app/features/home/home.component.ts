@@ -62,18 +62,6 @@ export class HomeComponent implements OnInit {
     window.location.reload();
   }
 
-  /*retrieveJobreqs(): void {
-    const params = this.getRequestParams(this.title, this.page, this.pageSize);
-    this.jobreqService.getAll(params)
-      .subscribe({
-        next: (data) => {
-          this.jobreqs = data;
-          console.log(data);
-        },
-        error: (e) => console.error(e)
-      });
-  }*/
-
   retrieveJobreqs(): void {
     const params = this.getRequestParams(this.title, this.page, this.pageSize);
     this.jobreqService.getAll(params)
@@ -82,10 +70,8 @@ export class HomeComponent implements OnInit {
         const { jobreqs, totalItems } = response;
         this.jobreqs = jobreqs;
         this.count = totalItems;
-        console.log(response);
       },
-      error => {
-        console.log(error);
+      error => { console.log(error);
       });
   }
 
@@ -112,7 +98,6 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.jobreqs = data;
-          console.log(data);
         },
         error: (e) => console.error(e)
       });

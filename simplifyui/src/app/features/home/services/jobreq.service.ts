@@ -10,8 +10,8 @@ const baseUrl = 'http://localhost:8080/api/jobreqs'
 export class JobreqService {
 
   constructor(private http: HttpClient) { }
-  getAll(): Observable<Jobreq[]> {
-    return this.http.get<Jobreq[]>(baseUrl);
+  getAll(params: any): Observable<any> {
+    return this.http.get<any>(baseUrl , { params });
   }
   get(id: any): Observable<Jobreq> {
     return this.http.get(`${baseUrl}/${id}`);

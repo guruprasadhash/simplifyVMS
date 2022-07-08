@@ -2,6 +2,19 @@ const db = require("../models");
 const Jobreq = db.jobreq;
 const Op = db.Sequelize.Op;
 
+const getPagination = (page, size) => {
+    const limit = size ? +size : 3;
+    const offset = page ? page * limit : 0;
+    return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+    const { count: totalItems, rows: jobreqs } = data;
+    const currentPage = page ? +page : 0;
+    const totalPages = Math.ceil(totalItems / limit);
+    return { totalItems, jobreqs, totalPages, currentPage };
+};
+
 exports.create = (req, res) => {
 
     if (!req.body.title) {
@@ -25,25 +38,27 @@ exports.create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Tutorial."
+                    err.message || "Some error occurred while creating the Job Requirement."
             });
         });
 };
 
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
-    Jobreq.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Job Requisition."
-            });
+    const { page, size, title } = req.query;
+    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    const { limit, offset } = getPagination(page, size);
+    Jobreq.findAndCountAll({ where: condition, limit, offset })
+      .then(data => {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Job Requisition."
         });
-};
+      });
+  };
 
 exports.findOne = (req, res) => {
     const id = req.params.id;

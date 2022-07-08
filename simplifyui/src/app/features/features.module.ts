@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProviders } from '../core/_helpers/auth.interceptor';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { FeaturesRoutingModule } from './features-routing.module';
 import { FeaturesComponent } from './features.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
     FeaturesRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     RouterModule.forChild(routes)
   ],
   providers: [authInterceptorProviders],

@@ -16,6 +16,8 @@
             </div>
           </div>
           <div class="card">
+            <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
+              (pageChange)="handlePageChange($event)"></pagination-controls>
             <h5 class="card-header">Job Requisitions</h5>
             <div class="card-body">
               <div class="table-responsive">
@@ -30,7 +32,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let jobreq of jobreqs; let i = index" [class.active]="i == currentIndex">
+                    <tr *ngFor="
+                    let jobreq of jobreqs | paginate : {
+                            itemsPerPage: pageSize,
+                            currentPage: page,
+                            totalItems: count
+                          };
+                    let i = index
+                  " [class.active]="i == currentIndex" (click)="setActiveJobreq(jobreq, i)">
                       <th scope="row">{{ jobreq.title }}</th>
                       <td>{{ jobreq.description }}</td>
                       <td>{{ jobreq.budget }}</td>
@@ -42,6 +51,12 @@
                   </tbody>
                 </table>
               </div>
+              Items per Page:
+              <select (change)="handlePageSizeChange($event)">
+                <option *ngFor="let size of pageSizes" [ngValue]="size">
+                  {{ size }}
+                </option>
+              </select>
             </div>
           </div>
         </div>
